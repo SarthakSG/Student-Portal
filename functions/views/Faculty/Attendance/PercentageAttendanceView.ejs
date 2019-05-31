@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%=title%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include ../../Utils/Bootstrap.ejs%>
+    <%include ../../Utils/PWA_Utils.ejs%>
+</head>
+<body class="" style="padding: 15px">
+
+<div class="card flex-wrap container" style="max-width: 70em ; margin-top: 10px">
+    <% if(!PercentageAttendanceList) { %>
+    <div class="text-center">No Attendance Found</div>
+    <% } %>
+
+    <h5 class="" style="margin: 10px auto 5px auto">Total Lectures : <%=TotalLectures%></h5>
+
+
+    <% for(var i = 0 ; i< PercentageAttendanceList.length ; i++) { %>
+        <div class="list-group">
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class=""><%=PercentageAttendanceList[i].Name%></h5>
+                    <h5 ><%=PercentageAttendanceList[i].Attendance%> %</h5>
+                </div>
+                <div class="d-flex w-100 justify-content-between">
+                    <p class="mb-1"><%=PercentageAttendanceList[i].RollNumber%></p>
+                    <p class="mb-1" style="margin-right:5px ">LA : <%=PercentageAttendanceList[i].lecturesAttended%> </p>
+                </div>
+            </div>
+        </div>
+
+        <% } %>
+        <div>
+            <a class="" href="/faculty/dashboard" style="cursor: pointer;">
+                <button type="button" class="btn btn-primary" id="btnSignUp">Go Back To Dashboard</button>
+                    </a>
+        </div>
+    <p class="w-100 text-center">* LA - Lectures Attended</p>
+    </div>
+    
+
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <%include ../../Utils/PWA_Utils.ejs%>
+
+    <% include ../../Utils/Bootstrap.ejs %>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
+
+
+    <!-- Leave out Storage -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-storage.js"></script> -->
+
+    <script>
+        var config = {
+            // ...
+        };
+        firebase.initializeApp(config);
+    </script>
+
+</head>
+<body>
+<!--         <% include Utils/Header.ejs %>
+ -->
+<div class="card mt-2 ">
+    <form class="align-content-center align-items-center text-center m-auto " style="width:300px"
+          action="/faculty/attendance/showattendancepercentage" method="get">
+        <div class="form-group mt-4">
+            <label for="SelectYear">Enter Date</label>
+            <br>
+            <input name="SubjectCodeAlpha" placeholder="Alpha" maxlength="3" size="5"
+                   style="text-transform: capitalize">
+            <input name="SubjectCodeNum" placeholder="Numeric" maxlength="3" size="5">
+        </div>
+
+        <button type="submit" class="btn btn-primary text-center align-items-center m-3">Show Attendance Percentage
+        </button>
+    </form>
+    <div id="AttenadanceContainer">
+    </div>
+</div>
+<script>
+    var AttenadanceContainer = document.getElementById('AttenadanceContainer');
+    var SubjectCodeAlpha = document.getElementsByName('SubjectCodeAlpha');
+    var SubjectCodeNum = document.getElementsByName('SubjectCodeNum');
+    var SubCode = SubjectCodeAlpha.value.toUpperCase() + '-' + SubjectCodeNum.value;
+    console.log(SubCode);
+
+    var database = firebase.database();
+
+    database.ref('IILM-CET/Attendance/' + SubCode + '/AttendancePercentage/LecturesAttended').on('value',(snapshot) => {
+        snapshot.forEach((childSnap)=>{
+            AttendanceObj = childSnap.val();
+            AttenadanceContainer.insertAdjacentHTML('beforeend',"")
+
+        })
+    })
+
+
+</script>
+</body>
+</html>
+

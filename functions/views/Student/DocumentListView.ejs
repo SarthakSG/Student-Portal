@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%=title%>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdn.rawgit.com/FezVrasta/snackbarjs/1.1.0/dist/snackbar.min.js"></script>
+    <% include ../Utils/Bootstrap.ejs%>
+    <%include ../Utils/PWA_Utils.ejs%>
+</head>
+
+<body style="padding: 15px">
+    <div id="loading_overlay" style="" class="container-fluid">
+        <div style="width: 100% ; height: 100%; " class="align-middle">
+            <div class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.onreadystatechange = () => {
+            var loading = $('#loading_overlay');
+            document.addEventListener('readystatechange', event => {
+                if (event.target.readyState === "complete") {
+                    loading.hide();
+                }
+            });
+
+        }
+    </script>
+    <div class="card container mt-4" style="z-index:10 ; max-width: 70em">
+        <% if(!doc) { %>
+        <div class="text-center">No Document Found</div>
+        <% } %>
+
+        <% for(var i = 0 ; i<doc.length ; i++) { %>
+        <div class="list-group">
+            <a href="<%-doc[i].url%>" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">
+                        <%=doc[i].name%>
+                    </h5>
+                </div>
+                <div class="d-flex w-100 justify-content-between">
+                    <p class="mb-1">
+                        <%=doc[i].subject%>
+                    </p>
+                    <p style="font-size: 12px" class="text-muted">
+                        <%=doc[i].date%>
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <% } %>
+
+
+    </div>
+</body>
+
+</html>

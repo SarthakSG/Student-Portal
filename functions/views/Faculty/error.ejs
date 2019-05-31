@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <% include Utils/Bootstrap.ejs%>
+      <!-- <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/sw.js').then(function (registration) {
+                    // Registration was successful
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function (err) {
+                    // registration failed :(
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+
+    </script> -->
+  </head>
+  <body>
+  <div class="card container m-auto" style="max-width: 30em" >
+    <div class="card-body align-content-center m-4">
+      <div class="lead text-center">I am a </div>
+      <div class="align-items-center align-content-center text-center mt-2 w-50 ml-auto mr-auto">
+        <form class="d-inline align-items-center m-auto" action="/student/signin"><button type="submit" class="btn btn-primary">Student</button></form>
+        <form class="d-inline align-items-center m-auto" action="/faculty/signin"><button type="submit" class="btn btn-primary">Faculty</button></form>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>

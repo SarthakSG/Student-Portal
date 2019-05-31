@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Sign In</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%include ../../Utils/PWA_Utils.ejs%>
+    <% include ../../Utils/Bootstrap.ejs%>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyBlzndLTLHThD68KN1C9C6UNueGj0JvaPU",
+            authDomain: "student-portal-2017.firebaseapp.com",
+            databaseURL: "https://student-portal-2017.firebaseio.com",
+            projectId: "student-portal-2017",
+            storageBucket: "student-portal-2017.appspot.com",
+            messagingSenderId: "124113730727"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+</head>
+
+<body>
+    <div id="loading_overlay" style="" class="container-fluid">
+        <div style="width: 100% ; height: 100%; " class="align-middle">
+            <div class="lds-ring" style="">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.onreadystatechange = () => {
+            var loading = $('#loading_overlay');
+            document.addEventListener('readystatechange', event => {
+                if (event.target.readyState === "complete") {
+                    loading.hide();
+                }
+            });
+
+        }
+    </script>
+    <div class="container card p-sm-1 mt-4" style="max-width: 26em">
+        <form class="m-2">
+            <div class="form-group">
+                <label for="InputEmail1" class="bmd-label-floating">Email address </label>
+                <input id="email" type="email" name="email" class="form-control" required id="InputEmail1">
+            </div>
+            <div class="form-group d-flex">
+                <label for="InputPassword1" class="bmd-label-floating">Password</label>
+                <input type="password" id="password" name="password" class="form-control" required id="InputPassword1">
+                <i class="material-icons button m-1" id="show_password" style="cursor:pointer;">remove_red_eye</i>
+            </div>
+           <!--  <% if(error!=""){%>
+            <div id="error" style="color: darkred">
+                <%= error %> <br></div>
+            <% } else { %>
+            <div id="error" class="hide" style="color: darkred"></div>
+            <% } %> -->
+
+            <div class="alert alert-danger" role="alert" id="err"></div>
+
+
+            <button type="submit" id="sign_in" class="btn btn-primary mt-1">Sign In</button>
+            <button type="button" onclick="location.href = '/student/signup';" class="btn btn-primary align-self-lg-end mt-1">Sign
+                Up
+            </button>
+            <div id="forgot_password" class="btn btn-primary mt-1">Forgot Password</div>
+
+        </form>
+    </div>
+    <script src="/ClientSideScripts/Student/Authentication/SignIn.js"></script>
+
+</body>
+
+</html>

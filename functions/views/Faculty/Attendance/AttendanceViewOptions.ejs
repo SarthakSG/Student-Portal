@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%=title%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-messaging.js"></script>
+    <script src="/javascripts/FCM/firebaseMessagingScriptFaculty.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+    <%include ../../Utils/PWA_Utils.ejs%>
+
+    <% include ../../Utils/Bootstrap.ejs%>
+</head>
+<body class="">
+
+<div class="card flex-wrap container" style="max-width: 40em ; margin-top:10px !important"  >
+    <form class="align-content-center align-items-center text-center m-auto "  action="/faculty/attendance/attendanceview" method="POST">
+        <div class="form-group mt-4">
+            <label for="SelectYear">Enter Subject Code</label>
+            <br>
+            <input name="SubjectCodeAlpha" placeholder="Alpha" maxlength="3" size="5" style="text-transform: capitalize">
+            <input name="SubjectCodeNum" placeholder="Numeric" maxlength="3" size="5">
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="SelectView" name="SelectView">
+                <option value="0">Select Attendance View</option>
+                <option value="1">Attendance Percentage</option>
+                <option value="2">Daily Attendance</option>
+            </select>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="Date">Set Date (Only for Daily Attendance View)</label>
+            <br>
+            <input name="Date" type="date" placeholder="Date">
+        </div>
+        <input type="text" name="t" id="t" hidden>
+        <button type="submit" class="btn btn-primary text-center align-items-center m-3">Show Attendance</button>
+    </form>
+
+
+
+</div>
+</div>
+
+<script src="/ClientSideScripts/Faculty/Authentication/AuthCheck.js"></script>
+<script>
+
+        GetIdToken((t)=>{
+                $('#t').val(t);
+                console.log('token Sent ... '+t);
+                
+            })
+</script>
+</body>
+</html>

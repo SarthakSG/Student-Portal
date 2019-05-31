@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%=title%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include ../../Utils/Bootstrap.ejs%>
+    <%include ../../Utils/PWA_Utils.ejs%>
+</head>
+<body style="padding: 15px">
+<div class="card mt-4 container" style="z-index:10; max-width: 70em">
+    <% if(!DailyAttendanceList) { %>
+    <div class="text-center">No Attendance Found</div>
+    <% } %>
+
+    <% for(var i = 0 ; i< DailyAttendanceList.length ; i++) { %>
+    <div class="list-group">
+        <div class="flex-column align-items-start">
+
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1 w-100 text-center">Lecture Number : <%=DailyAttendanceList[i][0]%></h5>
+            </div>
+            <% for(var j = 1  ; j< DailyAttendanceList[i].length ; j++) { %>
+            <div class="list-group w-100">
+                <div class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class=""><%=DailyAttendanceList[i][j].Name%></h5>
+                        <h5 ><%                       if(DailyAttendanceList[i][j].Attendance) { %>
+                            <i class="material-icons" style="margin-right: 0">check_box</i>
+                            <% } else { %>
+                            <i class="material-icons" style="margin-right: 0">indeterminate_check_box</i>
+                            <% } %></h5>
+                    </div>
+                    <div class="d-flex w-100 justify-content-between">
+                        <p class="mb-1"><%=DailyAttendanceList[i][j].RollNumber%></p>
+                    </div>
+                </div>
+            </div>
+
+            <% } %>
+
+        </div>
+    </div>
+
+    <% } %>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <title>
+                <%= title %>
+        </title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <script src="https://cdn.rawgit.com/FezVrasta/snackbarjs/1.1.0/dist/snackbar.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-messaging.js"></script>
+        <script src="/javascripts/FCM/firebaseMessagingScriptFaculty.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+        <% include ../Utils/Bootstrap.ejs %>
+        <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+
+        <%include ../Utils/PWA_Utils.ejs%>
+</head>
+
+<body style="padding: 15px">
+        <div id="loading_overlay" style="" class="container-fluid">
+                <div style="width: 100% ; height: 100%; " class="align-middle">
+                        <div class="lds-ring">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                        </div>
+                </div>
+        </div>
+        <script>
+                document.onreadystatechange = () => {
+                        var loading = $('#loading_overlay');
+                        document.addEventListener('readystatechange', event => {
+                                if (event.target.readyState === "complete") {
+                                        loading.hide();
+                                }
+                        });
+
+                }
+        </script>
+
+
+
+        <div id="accordion" class="container Attendance mt-4" style="max-width: 45em">
+                <div class="card " style="font-size: 18px">
+                        <div class="card-header">
+                                Loading Attendance Please Wait..
+                        </div>
+
+
+                </div>
+
+        </div>
+        <script src="/ClientSideScripts/Student/Authentication/AuthCheck.js"></script>
+
+        <script src="/ClientSideScripts/Student/Attendance.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Dashboard</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyBlzndLTLHThD68KN1C9C6UNueGj0JvaPU",
+            authDomain: "student-portal-2017.firebaseapp.com",
+            databaseURL: "https://student-portal-2017.firebaseio.com",
+            projectId: "student-portal-2017",
+            storageBucket: "student-portal-2017.appspot.com",
+            messagingSenderId: "124113730727"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <% include ../Utils/PWA_Utils.ejs %>
+
+    <% include ../Utils/Bootstrap.ejs %>
+</head>
+
+<body>
+    <div id="loading_overlay" style="" class="container-fluid">
+        <div style="width: 100% ; height: 100%; " class="align-middle">
+            <div class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.onreadystatechange = () => {
+            var loading = $('#loading_overlay');
+            document.addEventListener('readystatechange', event => {
+                if (event.target.readyState === "complete") {
+                    loading.hide();
+                }
+            });
+
+        }
+    </script>
+
+    <div class="card container" style="margin-top: 10px">
+
+    </div>
+
+
+    <form class="container form-group card p-4" style="max-width: 40em" method="post" action="">
+        <div class="d-inline-block text-center" style="color: #9b9b9b ; cursor: pointer">
+            <i style="width: 24px;font-size: 28px" id="s1" class="material-icons">star_rate</i>
+            <i id="s2" style="width: 28px ; font-size: 28px" class="material-icons">star_rate</i><i id="s3" style="width: 28px ; font-size: 28px"
+                class="material-icons">star_rate</i><i id="s4" style="width: 28px ; font-size: 28px" class="material-icons">star_rate</i><i
+                id="s5" style="  width: 28px; font-size: 28px" class="material-icons">star_rate</i>
+        </div>
+        <input id="star_rating" name="star_rating" hidden />
+        <input name="t" id="t" type="text" hidden>
+        <input class="form-control m-1" placeholder="Enter your suggestions here" name="suggestions" />
+        <button type="submit" class="btn btn-info m-auto">Submit</button>
+    </form>
+
+    <script>
+        var star_rating = document.getElementById('star_rating');
+        var starRating = 0;
+        var s1 = document.getElementById('s1');
+        var s2 = document.getElementById('s2');
+        var s3 = document.getElementById('s3');
+        var s4 = document.getElementById('s4');
+        var s5 = document.getElementById('s5');
+
+        s1.addEventListener('click', () => {
+            s1.style.color = "#eeff2f";
+            s2.style.color = "#9b9b9b";
+            s3.style.color = "#9b9b9b";
+            s4.style.color = "#9b9b9b";
+            s5.style.color = "#9b9b9b";
+            starRating = 1;
+            star_rating.value = starRating
+            console.log(star_rating.value);
+
+            $('#s1').addClass('rotate');
+            setTimeout(() => {
+                $('#s1').removeClass('rotate');
+
+            }, 2000);
+
+
+        })
+
+        s2.addEventListener('click', () => {
+            s1.style.color = "#eeff2f";
+            s2.style.color = "#eeff2f";
+            s3.style.color = "#9b9b9b";
+            s4.style.color = "#9b9b9b";
+            s5.style.color = "#9b9b9b";
+            starRating = 2;
+            star_rating.value = starRating
+            console.log(star_rating.value);
+            $('#s2').addClass('rotate');
+            setTimeout(() => {
+                $('#s2').removeClass('rotate');
+
+            }, 2000);
+
+
+        })
+
+        s3.addEventListener('click', () => {
+            s1.style.color = "#eeff2f";
+            s2.style.color = "#eeff2f";
+            s3.style.color = "#eeff2f";
+            s4.style.color = "#9b9b9b";
+            s5.style.color = "#9b9b9b";
+            starRating = 3;
+            star_rating.value = starRating
+            console.log(star_rating.value);
+            $('#s3').addClass('rotate');
+            setTimeout(() => {
+                $('#s3').removeClass('rotate');
+
+            }, 2000);
+
+        })
+
+        s4.addEventListener('click', () => {
+            s1.style.color = "#eeff2f";
+            s2.style.color = "#eeff2f";
+            s3.style.color = "#eeff2f";
+            s4.style.color = "#eeff2f";
+            s5.style.color = "#9b9b9b";
+            starRating = 4;
+            star_rating.value = starRating
+            console.log(star_rating.value);
+            $('#s4').addClass('rotate');
+            setTimeout(() => {
+                $('#s4').removeClass('rotate');
+
+            }, 2000);
+
+        })
+
+        s5.addEventListener('click', () => {
+            s1.style.color = "#eeff2f";
+            s2.style.color = "#eeff2f";
+            s3.style.color = "#eeff2f";
+            s4.style.color = "#eeff2f";
+            s5.style.color = "#eeff2f";
+            starRating = 5;
+            star_rating.value = starRating
+            console.log(star_rating.value);
+            $('#s5').addClass('rotate');
+            setTimeout(() => {
+                $('#s5').removeClass('rotate');
+
+            }, 2000);
+        })
+
+        star_rating.value = starRating
+        console.log(star_rating.value);
+
+    </script>
+    <script src="/ClientSideScripts/Student/Authentication/AuthCheck.js"></script>
+    <script src="/ClientSideScripts/Student/Feedback.js"></script>
+</body>
+
+</html>

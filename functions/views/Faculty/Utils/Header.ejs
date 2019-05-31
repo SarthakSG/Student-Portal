@@ -1,0 +1,40 @@
+<nav class="navbar navbar-light bg-light fixed-top ">
+    <a class="" onclick="window.history.back()" style="cursor: pointer;">
+        <i class="material-icons" style="color: #00B7FF ; font-weight: 600 ; font-size: 2.2em">arrow_back</i>    </a>
+    <div class="nav-item dropdown">
+        <a class="dropdown-toggle nav-link" style="padding:0px;" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%if(displayName!=null){ %>
+            <div class="align-items-center"><%= displayName %></div>
+            <% } else {%>
+            <div class="align-items-center"></div>
+            <%}%>
+
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/faculty/logout">Log Out</a>
+            <a class="dropdown-item" href="/faculty/profile">Profile</a>
+            <a class="dropdown-item d-inline-block" href="/faculty/rate">Rate <i style="width:12px; font-size: 12px" class="material-icons">star_rate</i></a>
+
+
+        </div>
+    </div>
+
+</nav>
+
+<div id="loading_overlay" class="container-fluid" >
+        <div style="width: 80px ; margin: 20% auto auto auto" class="align-middle">
+            <img src="/Ripple-1s-200px.gif" style="width: 80px;" alt="" srcset="">
+        </div>
+    
+    </div>
+    <script>
+            document.onreadystatechange = () => {
+                var loading = $('#loading_overlay');
+                document.addEventListener('readystatechange', event => {
+                     if (event.target.readyState === "complete") {
+                        loading.hide();
+                    }
+                });
+    
+            }
+        </script>

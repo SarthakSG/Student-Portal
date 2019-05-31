@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Faculty Dashboard</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="manifest" href="/manifest.json">
+    <% include ../Utils/PWA_Utils.ejs %>
+    <% include ../Utils/Bootstrap.ejs %>
+
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-messaging.js"></script>
+    <script src="/javascripts/FCM/firebaseMessagingScriptFaculty.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+    <script src="/javascripts/Utils/ejs.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+</head>
+
+<body class="">
+    <div id="loading_overlay" style="" class="container-fluid">
+        <div style="width: 100% ; height: 100%; " class="align-middle">
+            <div class="lds-ring" style="">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#MainContent').hide();
+        document.onreadystatechange = () => {
+            var loading = $('#loading_overlay');
+            document.addEventListener('readystatechange', event => {
+                if (event.target.readyState === "complete") {
+                    loading.hide();
+                    $('#MainContent').show();
+
+                }
+            });
+
+        }
+    </script>
+
+    <script src="/ClientSideScripts/Faculty/Authentication/AuthCheck.js"></script>
+
+    <% include Utils/DashboardHeader.ejs %>
+    <script>
+        console.log((location.search));
+    </script>
+
+    <div id="MainContent">
+        <div class="card  p-2 flex-wrap container" style="margin-top: 100px; max-width: 40em">
+            <form id="getDocForm" class="align-content-center align-items-center text-center m-auto w-75" action="/faculty/dashboard/getDoc"
+                method="POST">
+                <div class="form-group ">
+                    <label for="SelectYear">Select Year</label>
+                    <select class="form-control" id="SelectYear" name="SelectYear">
+                        <option value="1">First Year</option>
+                        <option value="2">Second Year</option>
+                        <option value="3">Third Year</option>
+                        <option value="4">Fourth Year</option>
+                    </select>
+                </div>
+                <div class="form-group ">
+                    <label for="SelectBranch">Select Branch</label>
+                    <select class="form-control" id="SelectBranch" name="SelectBranch">
+                        <option value="1">Computer Science</option>
+                        <option value="2">Electronics</option>
+                        <option value="3">Bio-Technology</option>
+                        <option value="4">Mechanical</option>
+                        <option value="5">Civil</option>
+                        <option value="6">Automobile</option>
+                        <option value="7">Common</option>
+                    </select>
+                </div>
+                <div class="form-group ">
+                    <label for="SelectDocumentType">Select Document</label>
+                    <select class="form-control" id="SelectDocumentType" name="SelectDocumentType">
+                        <option value="Notes">Notes</option>
+                        <option value="Assignments">Assignments</option>
+                        <option value="Circulars">Circulars / Notices</option>
+                        <option value="Lectures">Lectures</option>
+                    </select>
+                </div>
+                <input name="t" id="t" type="text" hidden>
+                <button type="submit" id="LinkLogOuttest" class="btn btn-primary text-center align-items-center m-3">Get
+                </button>
+                <!--  <button type="button" id="sendN" class="btn btn-primary text-center align-items-center m-3">Send
+            </button> -->
+            </form>
+            <script>
+                $('#sendN').on('click', () => {
+                    var req = new XMLHttpRequest();
+                    var url = '/faculty//fcm/sendNotification';
+                    req.open('post', url, true);
+                    req.send();
+
+                })
+            </script>
+
+        </div>
+        <!--<div class="btn-group dropup fixed-bottom m-4" style="position: fixed">
+      <button type="button" class="btn btn-secondary btn-raised dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Menu
+      </button>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
+            <a class="dropdown-item" href="/faculty/dashboard/uploadDoc">Upload Documents</a>
+            <a class="dropdown-item" href="/faculty/attendance/markattendancedetails" disabled>Mark Attendance</a>
+            <a class="dropdown-item" href="/faculty/attendance/attendanceviewoptions" disabled>Show Attendance</a>
+    
+    
+        </div>
+    
+    </div>-->
+        <div class=" dropup  fixed-bottom m-4" style="position: fixed">
+
+            <button aria-expanded="false" aria-haspopup="true" type="button" id="menu" class="btn btn-primary bmd-btn-fab btn-raised dropdown-toggle"
+                data-toggle="dropdown" style="background-color: #ffffff !important;">
+                <i id="menu_icon" class="material-icons">more_vert</i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/faculty/dashboard/uploadDoc">Upload Documents</a>
+                <a class="dropdown-item" href="/faculty/attendance/markattendancedetails" disabled>Mark Attendance</a>
+                <a class="dropdown-item" href="/faculty/attendance/attendanceviewoptions" disabled>Show Attendance</a>
+            </div>
+
+        </div>
+    </div>
+    <script src="/ClientSideScripts/Faculty/Dashboard.js">
+    </script>
+</body>
+
+</html>

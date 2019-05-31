@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Sign Up</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyBlzndLTLHThD68KN1C9C6UNueGj0JvaPU",
+            authDomain: "student-portal-2017.firebaseapp.com",
+            databaseURL: "https://student-portal-2017.firebaseio.com",
+            projectId: "student-portal-2017",
+            storageBucket: "student-portal-2017.appspot.com",
+            messagingSenderId: "124113730727"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <% include ../../Utils/Bootstrap.ejs%>
+    <%include ../../Utils/PWA_Utils.ejs%>
+
+</head>
+<body class="">
+    <div id="loading_overlay" style="" class="container-fluid">
+        <div style="width: 100% ; height: 100%; " class="align-middle">
+            <div class="lds-ring" style="">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.onreadystatechange = () => {
+            document.addEventListener('readystatechange', event => {
+                if (event.target.readyState === "complete") {
+                    $('#loading_overlay').hide();
+                }
+            })
+        }
+    </script>
+    <div class="flex-wrap card container mt-4" style="max-width: 40em">
+        <form id="signupForm" action="/student/signup" class="m-3 flex-wrap " method="post">
+            <div class="form-group" hidden>
+                <label for="uid" class="bmd-label-floating">uid</label>
+                <input type="text" name="uid" class="form-control" id="uid">
+            </div>
+            <div class="form-group">
+                <label for="rollNumber" class="bmd-label-floating">Roll Number</label>
+                <input type="text" name="rollNumber" class="form-control" id="rollNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="firstName" class="bmd-label-floating">First Name</label>
+                <input type="text" name="firstName" class="form-control" id="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="bmd-label-floating">Last Name</label>
+                <input type="text" name="lastName" class="form-control" id="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="InputEmail1" class="bmd-label-floating">Email address</label>
+                <input type="email" name="email" class="form-control" id="InputEmail1" required>
+            </div>
+            <div class="form-group ">
+                <label for="SelectYear">Select Year</label>
+                <select class="form-control" id="SelectYear" name="SelectYear" required>
+                    <option value="1">First Year</option>
+                    <option value="2">Second Year</option>
+                    <option value="3">Third Year</option>
+                    <option value="4">Fourth Year</option>
+                </select>
+            </div>
+            <div class="form-group ">
+                <label for="SelectBranch">Select Branch</label>
+                <select class="form-control" id="SelectBranch" name="SelectBranch" required>
+                    <option value="1">Computer Science</option>
+                    <option value="2">Electronics</option>
+                    <option value="3">Bio-Technology</option>
+                    <option value="4">Mechanical</option>
+                    <option value="5">Civil</option>
+                    <option value="6">Automobile</option>
+
+                </select>
+            </div>
+
+            <div class="form-group d-flex">
+                <label for="InputPassword1" class="bmd-label-floating">Choose Password</label>
+                <input type="password" name="tpassword" class="form-control InputPassword" id="tInputPassword1"
+                    minlength="10" required>
+                <i class="material-icons button m-1" id="show_password" style="cursor:pointer;">remove_red_eye</i>
+            </div>
+            <div class="form-group">
+                <label for="InputPassword1" class="bmd-label-floating">Confirm Password</label>
+                <input type="password" name="password" class="form-control InputPassword" id="InputPassword1" minlength="10"
+                    required>
+            </div>
+            <div class="alert alert-danger" role="alert" id="err"></div>
+            <% if(error){%>
+            <div class="alert alert-danger" role="alert" id="err">
+                <%= error %>
+            </div>
+            <% } %>
+            <button type="submit" class="btn btn-primary" id="btnSignUp">Sign Up</button>
+
+        </form>
+    </div>
+
+    <script src="/ClientSideScripts/Student/Authentication/SignUp.js"></script>
+
+</body>
+
+</html>

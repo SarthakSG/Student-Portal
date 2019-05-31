@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Feedback</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-messaging.js"></script>
+    <script src="/javascripts/FCM/firebaseMessagingScriptFaculty.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+    <% include ../Utils/PWA_Utils.ejs %>
+
+    <% include ../Utils/Bootstrap.ejs %>
+</head>
+
+<body>
+    <div id="loading_overlay" style="" class="container-fluid">
+        <div style="width: 100% ; height: 100%; " class="align-middle">
+            <div class="lds-ring" style="">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.onreadystatechange = () => {
+            var loading = $('#loading_overlay');
+            document.addEventListener('readystatechange', event => {
+                if (event.target.readyState === "complete") {
+                    loading.hide();
+                }
+            });
+
+        }
+    </script>
+    <div class="card container" style="margin-top: 10px">
+
+
+    </div>
+
+
+    <form class="container card p-4" style="max-width: 40em" method="post" action="">
+        <div class="d-inline-block text-center" style="color: #9b9b9b ; cursor: pointer">
+            <i style="width: 24px;font-size: 28px" id="s1" class="material-icons">star_rate</i>
+            <i id="s2" style="width: 28px ; font-size: 28px" class="material-icons">star_rate</i><i id="s3" style="width: 28px ; font-size: 28px"
+                class="material-icons">star_rate</i><i id="s4" style="width: 28px ; font-size: 28px" class="material-icons">star_rate</i><i
+                id="s5" style="  width: 28px; font-size: 28px" class="material-icons">star_rate</i>
+        </div>
+        <input id="feedback" class="form-control m-2" placeholder="Enter your suggestions here" name="suggestions" />
+        <button id="submit" type="button" class="btn btn-info m-auto">Submit</button>
+    </form>
+    <script src="/ClientSideScripts/Faculty/Authentication/AuthCheck.js"></script>
+    <script>
+        var starRating = 0;
+        var s1 = document.getElementById('s1');
+        var s2 = document.getElementById('s2');
+        var s3 = document.getElementById('s3');
+        var s4 = document.getElementById('s4');
+        var s5 = document.getElementById('s5');
+
+        s1.addEventListener('click', () => {
+            s1.style.color = "#eeff2f";
+            s2.style.color = "#9b9b9b";
+            s3.style.color = "#9b9b9b";
+            s4.style.color = "#9b9b9b";
+            s5.style.color = "#9b9b9b";
+            starRating = 1;
+
+            $('#s1').addClass('rotate');
+            setTimeout(() => {
+                $('#s1').removeClass('rotate');
+
+            }, 2000);
+
+
+        })
+
+        s2.addEventListener('click', () => {
+            s1.style.color = "#eeff2f";
+            s2.style.color = "#eeff2f";
+            s3.style.color = "#9b9b9b";
+            s4.style.color = "#9b9b9b";
+            s5.style.color = "#9b9b9b";
+            starRating = 2;
+            $('#s2').addClass('rotate');
+            setTimeout(() => {
+                $('#s2').removeClass('rotate');
+
+            }, 2000);
+
+
+        })
+
+        s3.addEventListener('click', () => {
+            s1.style.color = "#eeff2f";
+            s2.style.color = "#eeff2f";
+            s3.style.color = "#eeff2f";
+            s4.style.color = "#9b9b9b";
+            s5.style.color = "#9b9b9b";
+            starRating = 3;
+
+            $('#s3').addClass('rotate');
+            setTimeout(() => {
+                $('#s3').removeClass('rotate');
+
+            }, 2000);
+
+        })
+
+        s4.addEventListener('click', () => {
+            s1.style.color = "#eeff2f";
+            s2.style.color = "#eeff2f";
+            s3.style.color = "#eeff2f";
+            s4.style.color = "#eeff2f";
+            s5.style.color = "#9b9b9b";
+            starRating = 4;
+
+            $('#s4').addClass('rotate');
+            setTimeout(() => {
+                $('#s4').removeClass('rotate');
+
+            }, 2000);
+
+        })
+
+        s5.addEventListener('click', () => {
+            s1.style.color = "#eeff2f";
+            s2.style.color = "#eeff2f";
+            s3.style.color = "#eeff2f";
+            s4.style.color = "#eeff2f";
+            s5.style.color = "#eeff2f";
+            starRating = 5;
+
+            $('#s5').addClass('rotate');
+            setTimeout(() => {
+                $('#s5').removeClass('rotate');
+
+            }, 2000);
+        })
+
+        document.getElementById('submit').addEventListener('click', () => {
+            var database = firebase.database();
+            var Feedback = {
+                Rating: starRating,
+                Feedback: document.getElementById('feedback').value
+            }
+            authCheck((user) => {
+                var ratingsRef = database.ref('IILM-CET/Feedbacks/' + user.uid).push(Feedback);
+            })
+
+        })
+
+    </script>
+</body>
+
+</html>

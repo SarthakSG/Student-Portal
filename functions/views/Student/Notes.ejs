@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include ../Utils/Bootstrap.ejs%>
+</head>
+<body>
+        <% include Utils/Header.ejs %>
+
+<div class="card container mt-4" style="    z-index:10;">
+
+    <% for(var i = 0 ; i<notes.length ; i++) { %>
+    <div class="list-group m-1">
+        <a href="<%-notes[i].url%>" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><%=notes[i].name%></h5>
+                <p class="text-muted"><%=notes[i].date%></p>
+            </div>
+            <p class="mb-1"><%=notes[i].subject%></p>
+        </a>
+    </div>
+    <div class="list-group m-1">
+        <a href="<%-notes[i].url%>" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><%=notes[i].name%></h5>
+                <p class="text-muted"><%=notes[i].date%></p>
+            </div>
+            <p class="mb-1"><%=notes[i].subject%></p>
+        </a>
+    </div><div class="list-group m-1">
+        <a href="<%-notes[i].url%>" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><%=notes[i].name%></h5>
+                <p class="text-muted"><%=notes[i].date%></p>
+            </div>
+            <p class="mb-1"><%=notes[i].subject%></p>
+        </a>
+    </div>
+    <% } %>
+
+
+</div>
+</body>
+</html>

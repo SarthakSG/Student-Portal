@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Faculty Sign Up</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyBlzndLTLHThD68KN1C9C6UNueGj0JvaPU",
+            authDomain: "student-portal-2017.firebaseapp.com",
+            databaseURL: "https://student-portal-2017.firebaseio.com",
+            projectId: "student-portal-2017",
+            storageBucket: "student-portal-2017.appspot.com",
+            messagingSenderId: "124113730727"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <% include ../../Utils/Bootstrap.ejs%>
+    <%include ../../Utils/PWA_Utils.ejs%>
+
+</head>
+
+<body>
+    <div id="loading_overlay" style="" class="container-fluid">
+        <div style="width: 100% ; height: 100%; " class="align-middle">
+            <div class="lds-ring" style="">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.onreadystatechange = () => {
+            var loading = $('#loading_overlay');
+            document.addEventListener('readystatechange', event => {
+                if (event.target.readyState === "complete") {
+                    loading.hide();
+                }
+            });
+
+        }
+    </script>
+    <div class="container card mt-4" style="max-width: 40em">
+        <form id="signupForm" action="/faculty/signup" class="m-3" method="post">
+            <div class="form-group" hidden>
+                <label for="uid" class="bmd-label-floating">uid</label>
+                <input type="text" name="uid" class="form-control" id="uid">
+            </div>
+            <div class="form-group">
+                <label for="facultyId" class="bmd-label-floating">Faculty Id</label>
+                <input type="text" name="facultyId" class="form-control" id="facultyId" required>
+            </div>
+            <div class="form-group">
+                <label for="firstName" class="bmd-label-floating">First Name</label>
+                <input type="text" name="firstName" class="form-control" id="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="bmd-label-floating">Last Name</label>
+                <input type="text" name="lastName" class="form-control" id="lastName" required >
+            </div>
+            <div class="form-group">
+                <label for="InputEmail1" class="bmd-label-floating">Email address</label>
+                <input type="email" name="email" class="form-control" id="InputEmail1" required>
+            </div>
+            <div class="form-group">
+                <label for="verificationKey" class="bmd-label-floating">Faculty Verification Key</label>
+                <input type="text" name="verificationKey" class="form-control" id="verificationKey" required>
+            </div>
+
+            <div class="form-group d-flex">
+                <label for="InputPassword1" class="bmd-label-floating">Choose Password</label>
+                <input type="password" name="tpassword" class="form-control" id="tInputPassword1" minlength="10" required>
+                <i class="material-icons button m-1" id="show_password" style="cursor:pointer;">remove_red_eye</i>
+
+            </div>
+            <div class="form-group">
+                <label for="InputPassword1" class="bmd-label-floating">Confirm Password</label>
+                <input type="password" name="password" class="form-control" id="InputPassword1" minlength="10" required>
+            </div>
+
+            <div class="alert alert-danger" role="alert" id="err"></div>
+            <% if(error){%>
+            <div class="alert alert-danger" role="alert" id="err">
+                <%= error %>
+            </div>
+            <% } %>
+
+            <button type="submit" class="btn btn-primary" id="btnSignUp">Sign Up</button>
+
+
+
+        </form>
+    </div>
+
+    <script src="/ClientSideScripts/Faculty/Authentication/SignUp.js"></script>
+
+</body>
+
+</html>

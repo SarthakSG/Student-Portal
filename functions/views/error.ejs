@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <% include Utils/Bootstrap.ejs%>
+</head>
+
+<body>
+  <div class="card container m-auto" style="max-width: 45em">
+    <div class="card-body align-content-center m-4">
+      <div class="lead text-center">Error</div>
+      <div class="w-100 m-auto" style="padding: 0.5%">
+        <div class="m-auto" style="max-width:5em">
+          <img src="/tempLogo.png" width="100%" class="d-inline-block m-auto align-top" alt="Logo">
+
+        </div>
+        <h5 class="m-auto" style="margin-top: 20px !important; color: red"><%=error%></h5>
+
+      </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+body  {
+  padding: 10px 20px 20px 20px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: url("../bg.jpg");
+  background-repeat: repeat-y no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;}
+
+.card{
+  border-radius: 15px !important;
+}
+@media screen and (min-width: 700px) {
+  .lds-ring {
+    top: 50%;
+    left: 48%;
+  }
+}
+@media screen and (max-width: 700px) {
+  .lds-ring {
+    top: 42%;
+    left: 42%;
+  }
+}
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 6px solid #3ba4ce;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #3ba4ce transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+a {
+  color: #00B7FF;
+}
+#menu_icon{
+  color: #040038;
+}
+.iilm_logo {
+  height: 60px;
+}
+.iilm_logo:hover {
+  position: fixed;
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  -o-transform: scale(1.5);
+  transform: scale(1.5);
+  z-index: 1000;
+}
+.iilm_logo {
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.rotate{
+  animation-name: rotate_menu;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+
+}
+
+.loading {
+  animation-name: rotate_menu;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+
+
+}
+
+.hide {
+  display: none;
+}
+
+
+@keyframes rotate_menu {
+  from {
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+
+  }
+  to{
+    -ms-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+
+}
+
+#loading_overlay{
+  width: 100% ; height: 100% ;top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  background-color: rgba(255, 255, 255, 0.80);
+  position: fixed
+}

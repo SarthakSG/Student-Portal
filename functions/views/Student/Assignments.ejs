@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include ../Utils/Bootstrap.ejs%>
+</head>
+<body>
+<!--         <% include Utils/Header.ejs %>
+ -->
+<div class="card container mt-2" style="    z-index:10;">
+    <table width="100%" class="text-center m-3">
+        <tr class="text-center">
+            <th width="30%">Name</th>
+            <th width="30">Subject</th>
+            <th width="30%">Date</th>
+        </tr>
+        <% for(var i = 0 ; i<assignments.length ; i++) { %>
+        <tr class="mt-1" onclick="window.open('<%-assignments[i].url%>','mywindow');" style="cursor: default;">
+            <td><%=assignments[i].name%></td>
+            <td><%=assignments[i].subject%></td>
+            <td><%=assignments[i].date%></td>
+        </tr>
+        <% } %>
+    </table>
+
+</div>
+</body>
+</html>

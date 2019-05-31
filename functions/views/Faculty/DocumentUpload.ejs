@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload Documents</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%include ../Utils/PWA_Utils.ejs%>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+
+        <!-- Add additional services that you want to use -->
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-messaging.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-storage.js"></script>
+
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyBlzndLTLHThD68KN1C9C6UNueGj0JvaPU",
+                authDomain: "student-portal-2017.firebaseapp.com",
+                databaseURL: "https://student-portal-2017.firebaseio.com",
+                projectId: "student-portal-2017",
+                storageBucket: "student-portal-2017.appspot.com",
+                messagingSenderId: "124113730727"
+            };
+            firebase.initializeApp(config);
+        </script>
+
+        <!-- Material Design for Bootstrap fonts and icons -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.0.0-beta.4/dist/css/bootstrap-material-design.min.css"
+            integrity="sha384-R80DC0KVBO4GSTw+wZ5x2zn2pu4POSErBkf8/fSFhPXHxvHJydT0CSgAP2Yo2r4I" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
+            crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/bootstrap-material-design@4.0.0-beta.4/dist/js/bootstrap-material-design.js" integrity="sha384-3xciOSDAlaXneEmyOo0ME/2grfpqzhhTcM4cE32Ce9+8DW/04AGoTACzQpphYGYe"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.rawgit.com/FezVrasta/snackbarjs/1.1.0/dist/snackbar.min.js"></script>
+        <script>$(document).ready(function () { $('body').bootstrapMaterialDesign(); });</script>
+</head>
+
+<body>
+    <div id="loading_overlay" class="container-fluid">
+        <div style="width: 80px ; margin: 20% auto auto auto" class="align-middle">
+            <img src="/Ripple-1s-200px.gif" style="width: 80px;" alt="" srcset="">
+        </div>
+
+    </div>
+    <script>
+        document.onreadystatechange = () => {
+            var loading = $('#loading_overlay');
+            document.addEventListener('readystatechange', event => {
+                if (event.target.readyState === "complete") {
+                    loading.hide();
+                }
+            });
+
+        }
+    </script>
+    <div class="card mt-4 container" style="max-width: 45em;">
+        <div class="align-content-center align-items-center text-center m-auto w-75">
+            <div class="form-group ">
+                <label for="Name">Enter Upload Name</label>
+                <input class="form-control" id="Name" name="Name" type="text" required>
+            </div>
+            <div class="form-group ">
+                <label for="Subject">Enter Upload Subject</label>
+                <input class="form-control" id="Subject" name="Subject" type="text" required>
+            </div>
+            <div class="form-group ">
+                <label for="SelectYear">Select Year</label>
+                <select class="form-control" id="SelectYear" name="SelectYear" required>
+                    <option value="1">First Year</option>
+                    <option value="2">Second Year</option>
+                    <option value="3">Third Year</option>
+                    <option value="4">Fourth Year</option>
+                </select>
+            </div>
+            <div class="form-group ">
+                <label for="SelectBranch">Select Branch</label>
+                <select class="form-control" id="SelectBranch" name="SelectBranch" required>
+                    <option value="1">Computer Science</option>
+                    <option value="2">Electronics</option>
+                    <option value="3">Bio-Technology</option>
+                    <option value="4">Mechanical</option>
+                    <option value="5">Civil</option>
+                    <option value="6">Automobile</option>
+
+                </select>
+            </div>
+            <div class="form-group ">
+                <label for="SelectDocumentType">Select Document</label>
+                <select class="form-control" id="SelectDocumentType" name="SelectDocumentType" required>
+                    <option value="Notes">Notes</option>
+                    <option value="Assignments">Assignments</option>
+                    <option value="Circulars">Circulars / Notices</option>
+                    <option value="Lectures">Lectures</option>
+                </select>
+            </div>
+            <div class="form-group ">
+                <input class="form-control" id="File" name="File" type="file" required>
+            </div>
+
+            <div class="progress" style="height: 20px;margin: 20px 0 20px 0">
+                <div id="upload_progress" class="progress-bar" role="progressbar" style="width: 0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <button type="button" id="btnUpload" class="btn btn-primary text-center align-items-center m-3">Upload</button>
+        </div>
+
+
+
+    </div>
+    <script src="/ClientSideScripts/Faculty/Authentication/AuthCheck.js"></script>
+    <script>
+
+        authCheck(() => {
+            var btnUpload = document.getElementById('btnUpload');
+            btnUpload.addEventListener('click', () => {
+                btnUpload.disabled = true;
+                var uploadName = document.getElementById('Name').value;
+                var docType = document.getElementById('SelectDocumentType').value;
+                var uploadSubject = document.getElementById('Subject').value;
+                var year = parseInt(document.getElementById('SelectYear').value);
+                var branch = parseInt(document.getElementById('SelectBranch').value);
+                year_branch = parseInt(year * 10) + parseInt(branch);
+                var file = document.getElementById('File').files[0];
+                var date = new Date();
+                var uplaodDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+
+                console.log('In Script');
+                console.log(file + uploadName);
+                var dbRef = firebase.database().ref('IILM-CET/' + docType)
+                var storageRef = firebase.storage().ref('IILM-CET/' + year + '/' + branch + '/' + docType + '/' + uploadName);
+
+                var metadata = {
+                };
+
+                var uploadTask = storageRef.put(file, metadata);
+                uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+                    function (snapshot) {
+                        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                        var progress = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100).toFixed(2);
+
+                        var progressbar = document.getElementById("upload_progress");
+                        console.log('Upload is ' + progress + '% done');
+                        progressbar.style.width = progress + '%';
+                        progressbar.setAttribute("aria-valuenow", progress);
+                        progressbar.innerHTML = progress + "% Uploaded";
+                        switch (snapshot.state) {
+                            case firebase.storage.TaskState.PAUSED: // or 'paused'
+                                console.log('Upload is paused');
+                                break;
+                            case firebase.storage.TaskState.RUNNING: // or 'running'
+                                console.log('Upload is running');
+                        }
+                    }, function (error) {
+
+                        // A full list of error codes is available at
+                        // https://firebase.google.com/docs/storage/web/handle-errors
+                        switch (error.code) {
+                            case 'storage/unauthorized':
+                                // User doesn't have permission to access the object
+                                break;
+
+                            case 'storage/canceled':
+                                // User canceled the upload
+                                break;
+                            case 'storage/unknown':
+                                // Unknown error occurred, inspect error.serverResponse
+                                break;
+                        }
+                    }, function () {
+                        // Upload completed successfully, now we can get the download URL
+
+                        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                            var downloadURL = downloadURL;
+                            var dbUpload = {
+                                name: uploadName,
+                                url: downloadURL,
+                                date: uplaodDate,
+                                yearU: year,
+                                branchU: branch,
+                                subject: uploadSubject,
+                                year_branch: year_branch
+                            }
+                            var payload = {
+                                data: dbUpload,
+                                ref: "IILM-CET/" + docType
+                            }
+
+                            firebase.database().ref(payload.ref).push(payload.data);
+
+                            alert('Upload Successful');
+                            window.location = '/faculty/dashboard';
+
+                            /*  var req = new XMLHttpRequest();
+                             req.open('post', '/faculty/dashboard/uploadDoc', true);
+                             console.log("Sending " + JSON.stringify(payload));
+                             console.log("url : " + (downloadURL));
+         
+                             req.send(JSON.stringify(payload)); */
+                        });
+
+
+
+
+                    });
+                console.log(error);
+
+
+            })
+
+        })
+
+
+    </script>
+</body>
+
+</html>

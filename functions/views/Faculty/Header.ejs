@@ -1,0 +1,23 @@
+    <nav class="navbar navbar-light bg-light fixed-top ">
+    <a class="" href="#">
+        <img src="/tempLogo.png" width="50" height="50" class="d-inline-block align-top" alt="Logo">
+    </a>
+        <div class="nav-item dropdown">
+    <a class="dropdown-toggle nav-link" style="padding:0px;" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%if(displayName!=null){ %>
+        <div class="align-items-center"><%= displayName %></div>
+        <% } else {%>
+        <div class="align-items-center"></div>
+        <%}%>
+
+</a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="/faculty/logout">Log Out</a>
+        <a class="dropdown-item" href="/faculty/profile">Profile</a>
+        <a class="dropdown-item d-inline-block" href="/faculty/rate">Rate <i style="width:12px; font-size: 12px" class="material-icons">star_rate</i></a>
+
+
+    </div>
+        </div>
+
+</nav>
